@@ -7,6 +7,7 @@ namespace BookApi.Data.Repositories
     {
         Task<IEnumerable<Book>> GetAllBooks();
         Task<Book> GetById(int id);
+        Task<Book> GetBookByName(string email);
         Task InsertBook(Book book);
         Task UpdateBook(Book book);
         Task DeleteBook(int id);

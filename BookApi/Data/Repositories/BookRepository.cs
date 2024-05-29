@@ -22,6 +22,11 @@ namespace BookApi.Data.Repositories
         {
             return await _context.Books.FindAsync(id);
         }
+        public async Task<Book> GetBookByName(string title)
+        {
+            return await _context.Books
+                                 .FirstOrDefaultAsync(b => b.Title == title);
+        }
 
         public async Task InsertBook(Book book)
         {

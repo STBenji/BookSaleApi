@@ -10,9 +10,9 @@ namespace BookApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBookRepository _bookRepository;   
-        public BooksController(IBookRepository bookRepository) 
-        { 
+        private readonly IBookRepository _bookRepository;
+        public BooksController(IBookRepository bookRepository)
+        {
             _bookRepository = bookRepository;
         }
 
@@ -20,14 +20,24 @@ namespace BookApi.Controllers
         public async Task<ActionResult<IEnumerable<Book>>> GetAllBooks()
         {
             var books = await _bookRepository.GetAllBooks();
-            return Ok(books); 
+            return Ok(books);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
             var book = await _bookRepository.GetById(id);
-            if(book == null)
+            if (book == null)
+                return NotFound();
+
+            return Ok(book);
+        }
+
+        [HttpGet("byName/{name}")]
+        public async Task<ActionResult<Book>> GetBookByName(string name)
+        {
+            var book = await _bookRepository.GetBookByName(name);
+            if (book == null)
                 return NotFound();
 
             return Ok(book);
@@ -75,7 +85,7 @@ namespace BookApi.Controllers
             {
                 return NotFound();
             }
-                
+
             await _bookRepository.DeleteBook(id);
             return NoContent();
         }
