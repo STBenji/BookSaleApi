@@ -1,5 +1,6 @@
 ﻿using BookApi.Data.Repositories;
 using BookApi.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace BookApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] 
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
