@@ -79,6 +79,8 @@ namespace BookApi.Controllers
             return NoContent();
         }
 
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {

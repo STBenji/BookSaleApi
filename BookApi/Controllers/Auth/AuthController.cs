@@ -1,5 +1,7 @@
 ﻿using BookApi.Data.Repositories;
 using BookApi.Domain;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +16,14 @@ namespace BookApi.Controllers.Auth
         public AuthController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+        }
+
+        [HttpGet("signOut")]
+        public async Task<IActionResult> RemoveCookie()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+
+            return Ok();
         }
 
         [HttpGet("byId/{id}")]
